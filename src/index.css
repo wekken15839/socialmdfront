@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  padding-top: 75px;
+  background-color: rgb(223, 223, 223);
+  min-height: 200vh;
+}
