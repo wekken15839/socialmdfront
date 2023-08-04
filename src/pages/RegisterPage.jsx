@@ -18,7 +18,6 @@ export const RegisterPage = () => {
     setValue,
     watch,
   } = useForm();
-  // const [gender, setGender] = useState("male");
 
   const navigate = useNavigate();
 
