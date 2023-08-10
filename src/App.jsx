@@ -2,11 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
-import { ProtectedRoute } from "./utils/ProtectedRoute";
 import { PostsPage } from "./pages/PostsPage";
 import { AuthProvider } from "./contexts/AuthContext";
 import Navbar from "./layouts/NavBar";
 import { PostsProvider } from "./contexts/PostsContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (

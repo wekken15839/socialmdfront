@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { IMAGES_BASE_URL } from "../config";
 import moment from "moment/moment";
 
-export const CommentForm = ({ postId, comments }) => {
+export const ToCommentForm = ({ postId, comments }) => {
   const [isHidden, setIsHidden] = useState(true);
   const {
     register,

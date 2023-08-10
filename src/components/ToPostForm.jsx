@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IMAGES_BASE_URL } from "../config";
-import { createPostRequest } from "../services/posts.service";
+import { toCapitalizeString } from "../helpers/toCapitalizeString.helper";
 
 export const CreatePostForm = () => {
   const {
@@ -25,12 +25,6 @@ export const CreatePostForm = () => {
   useEffect(() => {
     if (!isAuthenticated) navigate("/login");
   }, [isAuthenticated]);
-
-  const normalizeString = (string) => {
-    return (
-      string.toString().charAt(0).toUpperCase() + string.slice(1).toLowerCase()
-    );
-  };
 
   const onSubmit = handleSubmit(async (data) => {
     await createPost(data);
@@ -61,7 +55,7 @@ export const CreatePostForm = () => {
             },
           })}
           className="flex-1 border border-black rounded-md mt-4 w-full h-28 pl-2 resize-none"
-          placeholder={`What's on your mind, ${normalizeString(
+          placeholder={`What's on your mind, ${toCapitalizeString(
             user.username
           )}?`}
         />

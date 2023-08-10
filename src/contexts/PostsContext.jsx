@@ -71,7 +71,6 @@ export const PostsProvider = ({ children }) => {
           return result.data;
         }
       });
-      console.log(result.data);
       setPosts(newPosts);
     } catch (error) {
       console.error(error);
