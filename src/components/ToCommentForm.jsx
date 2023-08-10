@@ -19,6 +19,7 @@ export const ToCommentForm = ({ postId, comments }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     await commentPost(postId, data);
+    reset();
   });
 
   return (
@@ -53,13 +54,16 @@ export const ToCommentForm = ({ postId, comments }) => {
                   alt=""
                   className="h-12 w-12 rounded-full border shadow shadow-gray-400"
                 />
-                <div className="flex flex-col bg-blue-50 rounded-md w-full py-1 pl-2">
+                <div className="flex flex-col bg-blue-50 rounded-md w-10/12 py-1 pl-2">
                   <span className="text-base font-semibold">
                     {com.user.username}
                   </span>
-                  <span className="block first-letter:capitalize">
+                  <span className="block first-letter:capitalize break-words">
                     {com.comment}
                   </span>
+                  <small className="text-gray-400">
+                    {moment(com.date).calendar()}
+                  </small>
                 </div>
               </div>
             ))}
@@ -77,6 +81,11 @@ export const ToCommentForm = ({ postId, comments }) => {
             className="h-20 border border-black w-full rounded-md resize-none p-2 mt-5"
             placeholder="Write a comment"
           ></textarea>
+          {errors.comment?.type === "maxLength" && (
+            <span className="block text-center text-red-600 font-semibold">
+              {errors.comment.message}
+            </span>
+          )}
           <button className="bg-blue-600 font-bold text-white w-fit px-2 py-1 mt-3 rounded-md ">
             Comment
           </button>
