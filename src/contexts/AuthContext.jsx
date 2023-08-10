@@ -18,7 +18,7 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) => {
         logout,
       }}
     >
-      {children}
+      {props.children}
     </AuthContext.Provider>
   );
 };

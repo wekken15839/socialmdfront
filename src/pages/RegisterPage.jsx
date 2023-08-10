@@ -94,7 +94,7 @@ export const RegisterPage = () => {
                 type="text"
                 {...register("username", {
                   required: { value: true, message: "required" },
-                  maxLength: { value: 50, message: "max length is 50" },
+                  maxLength: { value: 12, message: `max length is 12` },
                   minLength: {
                     value: 6,
                     message: "username must have at least 6 characters",

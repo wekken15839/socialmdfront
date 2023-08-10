@@ -18,7 +18,7 @@ export const PostsPage = () => {
     getPosts();
   }, [isAuthenticated]);
 
-  isLoading && <h1>Loading...</h1>;
+  isLoading && <h2>Loading...</h2>;
 
   return (
     <>

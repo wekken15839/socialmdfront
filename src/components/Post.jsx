@@ -3,8 +3,12 @@ import { IoMdClose } from "react-icons/io";
 import { SlOptions } from "react-icons/sl";
 import { IMAGES_BASE_URL } from "../config";
 import { ToCommentForm } from "./toCommentForm";
+import { useState } from "react";
+import { LikesPopup } from "./LikesPopup";
 
 export const Post = ({ data }) => {
+  const [isLikesPopupVisible, setIsLikesPopupVisible] = useState(false);
+
   return (
     <div className="max-w-2xl p-3 bg-white shadow-xl mx-auto text-base my-8 rounded-md ">
       <div className="flex gap-2">
@@ -36,7 +40,10 @@ export const Post = ({ data }) => {
       )}
       <hr className="mt-3 " />
       <div className="flex justify-between gap-1 my-1">
-        <span className="flex items-center gap-1 ml-1  sm:text-base cursor-pointer">
+        <span
+          className="flex items-center gap-1 ml-1  sm:text-base cursor-pointer"
+          onClick={() => setIsLikesPopupVisible(true)}
+        >
           {data.likes.length} likes
         </span>
         <span className="ml-1  sm:text-base cursor-pointer">
@@ -45,6 +52,13 @@ export const Post = ({ data }) => {
       </div>
       <hr className="mt-3 " />
       <ToCommentForm postId={data._id} comments={data.comments} />
+      {isLikesPopupVisible && (
+        <LikesPopup
+          isOpen={isLikesPopupVisible}
+          onClose={() => setIsLikesPopupVisible(false)}
+          postId={data._id}
+        />
+      )}
     </div>
   );
 };
