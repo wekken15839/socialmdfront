@@ -5,10 +5,12 @@ import {
   profileRequest,
   registerRequest,
   logoutRequest,
+  updateRequest,
 } from "../services/auth.service";
 
 const AuthContext = createContext();
 
+// CCUSTOM HOOK
 export const useAuth = () => {
   const context = useContext(AuthContext);
 
@@ -19,10 +21,13 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = (props) => {
+  // [] implementar el update
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [error, setError] = useState();
+  const [errors, setErrors] = useState([]);
 
   const login = async (data) => {
     try {
@@ -32,9 +37,15 @@ export const AuthProvider = (props) => {
         setIsAuthenticated(true);
         setIsLoading(false);
         setUser(result.data);
+        setError();
+        setErrors([]);
       }
     } catch (error) {
-      setError(error.response.data.message);
+      if (error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setErrors(error.response.data.error);
+      }
     }
   };
 
@@ -59,8 +70,27 @@ export const AuthProvider = (props) => {
         setUser(result.data);
       }
     } catch (error) {
-      setError(error.response.data.message);
-      console.log(error);
+      if (error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setErrors(error.response.data.error);
+      }
+    }
+  };
+
+  const update = async (data) => {
+    try {
+      const result = await updateRequest(data);
+      if (result.data) {
+        setUser(result.data);
+        setError();
+      }
+    } catch (error) {
+      if (error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setErrors(error.response.data.error);
+      }
     }
   };
 
@@ -106,6 +136,8 @@ export const AuthProvider = (props) => {
         login,
         register,
         logout,
+        update,
+        errors,
       }}
     >
       {props.children}

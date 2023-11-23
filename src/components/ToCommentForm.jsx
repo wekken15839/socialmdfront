@@ -54,7 +54,7 @@ export const ToCommentForm = ({ postId, comments }) => {
                   alt=""
                   className="h-12 w-12 rounded-full border shadow shadow-gray-400"
                 />
-                <div className="flex flex-col bg-blue-50 rounded-md w-10/12 py-1 pl-2">
+                <div className="flex flex-col bg-blue-50 rounded-md w-10/12 py-1 pl-2 dark:bg-neutral-800">
                   <span className="text-base font-semibold">
                     {com.user.username}
                   </span>
@@ -78,7 +78,7 @@ export const ToCommentForm = ({ postId, comments }) => {
               required: { value: true, message: "comment is required" },
               maxLength: { value: 1000, message: "comment max length is 1000" },
             })}
-            className="h-20 border border-black w-full rounded-md resize-none p-2 mt-5"
+            className="h-20 border border-black w-full rounded-md resize-none p-2 mt-5 dark:bg-neutral-800 dark:outline-white"
             placeholder="Write a comment"
           ></textarea>
           {errors.comment?.type === "maxLength" && (
@@ -86,7 +86,7 @@ export const ToCommentForm = ({ postId, comments }) => {
               {errors.comment.message}
             </span>
           )}
-          <button className="bg-blue-600 font-bold text-white w-fit px-2 py-1 mt-3 rounded-md ">
+          <button className="bg-blue-600 font-bold text-white w-fit px-2 py-1 mt-3 rounded-md dark:bg-blue-900 ">
             Comment
           </button>
         </form>

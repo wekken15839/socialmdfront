@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { AiFillCloseCircle } from "react-icons/ai";
 import { IMAGES_BASE_URL } from "../config";
 import moment from "moment";
 import { AiFillLike } from "react-icons/ai";
@@ -52,7 +51,7 @@ export const LikesPopup = ({ isOpen, onClose, postId }) => {
                     <img
                       src={`${IMAGES_BASE_URL}/${like.user.photo}`}
                       alt=""
-                      className="w-9 h-9 rounded-full"
+                      className="w-9 h-9 rounded-full object-cover"
                     />
                     <AiFillLike className="absolute bottom-0 right-0 text-blue-600 text-md" />
                   </div>

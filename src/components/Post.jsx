@@ -6,24 +6,24 @@ import { ToCommentForm } from "./toCommentForm";
 import { useState } from "react";
 import { LikesPopup } from "./LikesPopup";
 
-export const Post = ({ data }) => {
+export const Post = ({ data, closePost }) => {
   const [isLikesPopupVisible, setIsLikesPopupVisible] = useState(false);
 
   return (
-    <div className="max-w-2xl p-3 bg-white shadow-xl mx-auto text-base my-8 rounded-md ">
+    <div className="max-w-2xl p-3 bg-white shadow-xl mx-auto text-base my-8 rounded-md dark:bg-neutral-900 dark:text-white post">
       <div className="flex gap-2">
         <img
           src={`${IMAGES_BASE_URL}/${data.user.photo}`}
           alt=""
-          className="h-12 w-12  sm:h-14 sm:w-14 rounded-full shadow shadow-slate-600"
+          className="h-12 w-12  sm:h-14 sm:w-14 rounded-full shadow shadow-slate-600 object-cover"
         />
         <div className="flex flex-col flex-1 justify-center">
-          <span>{data.user.username}</span>
+          <span className="capitalize">{data.user.username}</span>
           <span className="text-sm">{moment(data.createdAt).calendar()}</span>
         </div>
         <div className="flex items-center justify-center gap-2">
           <SlOptions className="cursor-pointer" />
-          <IoMdClose className="text-3xl cursor-pointer" />
+          <IoMdClose className="text-3xl cursor-pointer" onClick={closePost} />
         </div>
       </div>
       {data.description && (
@@ -34,7 +34,7 @@ export const Post = ({ data }) => {
           <img
             src={`${IMAGES_BASE_URL}/${data.image}`}
             alt=""
-            className="w-full h-full rounded-md"
+            className="w-full h-full rounded-md object-cover"
           />
         </div>
       )}

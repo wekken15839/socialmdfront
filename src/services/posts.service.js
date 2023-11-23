@@ -3,6 +3,8 @@ import axios from "./axios.service.js";
 
 export const createPostRequest = (data) => axios.post(`${BASE_URL}/post`, data, { headers: { "Content-Type": "multipart/form-data" } });
 
+export const getMyPostsRequest = () => axios.get(`${BASE_URL}/myposts`);
+
 export const getPostsRequest = () => axios.get(`${BASE_URL}/posts`);
 
 export const commentPostRequest = (postId, data) => axios.post(`${BASE_URL}/posts/comment/${postId}`, data)

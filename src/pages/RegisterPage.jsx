@@ -6,16 +6,15 @@ import { useEffect, useState } from "react";
 export const RegisterPage = () => {
   const {
     error,
+    errors: errorList,
     isAuthenticated,
     register: registerAuth,
     setError,
   } = useAuth();
   const {
     register,
-    reset,
     formState: { errors },
     handleSubmit,
-    setValue,
     watch,
   } = useForm();
 
@@ -23,7 +22,7 @@ export const RegisterPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/posts");
+      navigate("/posts", { replace: true });
     }
     setError();
   }, [isAuthenticated]);
@@ -35,6 +34,10 @@ export const RegisterPage = () => {
   return (
     <>
       <div className="form_container bg-white rounded-md max-w-xl sm:mx-auto py-5">
+        {errorList.length > 0 &&
+          errorList.map((err) => (
+            <small className="text-red-600 font-bold ">{err}</small>
+          ))}
         <div className="w-full">
           <h2 className="text-center font-bold text-3xl">Sign up</h2>
           <span className="block text-center">it's quick and easy</span>
@@ -132,7 +135,7 @@ export const RegisterPage = () => {
             <div className="flex flex-col">
               <input
                 placeholder="New password"
-                type="text"
+                type="password"
                 {...register("password", {
                   required: { value: true, message: "required" },
                   maxLength: { value: 50, message: "max length is 50" },
@@ -167,11 +170,6 @@ export const RegisterPage = () => {
                 })}
                 className="border bg-gray-200 pl-1 rounded-md border-black"
               />
-              {errors.confirmPassword?.type === "required" && (
-                <span className="text-red-600 font-bold">
-                  {errors.confirmPassword.message}
-                </span>
-              )}
               {errors.confirmPassword && (
                 <small className="text-red-600 font-bold ">
                   {errors.confirmPassword.message}
@@ -230,7 +228,7 @@ export const RegisterPage = () => {
           </div>
         </form>
       </div>
-      <div>{JSON.stringify(watch())}</div>
+      {/* <div>{JSON.stringify(watch())}</div> */}
     </>
   );
 };

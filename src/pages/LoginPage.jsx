@@ -10,7 +10,6 @@ export const LoginPage = () => {
   const {
     register,
     formState: { errors },
-    reset,
     handleSubmit,
   } = useForm();
 
@@ -18,7 +17,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/posts");
+      navigate("/posts", { replace: true });
     }
     setError();
   }, [isAuthenticated]);
